@@ -23,22 +23,23 @@ function signUp() {
     }
 
     try {
-      const response = await fetch('BackEnd/api/userExist', {
+      const response = await fetch('/BackEnd/api/userExist', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ email }),
       });
-      const { User } = await response.json();
+      // const { User } = await response.json();
+      const data = await response.json();
 
-      if (User) {
+      if (data.User) {
         setError("User already exists.!")
         return;
       }
 
 
-      const res = await fetch('BackEnd/api/register', {
+      const res = await fetch('/BackEnd/api/register', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
